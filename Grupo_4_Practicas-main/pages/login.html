@@ -57,25 +57,40 @@
 
 
     <script>
+        // Cobtador de usuarios y contraseñas
         const credentials = [
-            { user: 'admin', password: '1234' }, 
+            { user: 'admin', password: '1234' },
             { user: 'empleado', password: 'ticket2026' }
         ];
 
+        // Obtenemos el formulario y el lugar donde mostraremos mensajes de error.
         const form = document.getElementById('loginForm');
         const message = document.getElementById('errorMessage');
 
+        // Cuando el usuario hace clic en "Ingresar" se ejecuta esta función.
         form.addEventListener('submit', function (event) {
-            event.preventDefault();
+            event.preventDefault(); // Evita que la página se recargue.
 
-            const user = document.getElementById('user').value.trim();
-            const password = document.getElementById('password').value;
-            const validUser = credentials.find((item) => item.user === user && item.password === password);
+            const userInput = document.getElementById('user').value.trim();
+            const passwordInput = document.getElementById('password').value;
 
-            if (validUser) {
-                localStorage.setItem('techsolveUser', validUser.user);
+            // Buscamos un usuario que tenga el mismo nombre y contraseña.
+            let matchedUser = null;
+
+            for (let i = 0; i < credentials.length; i++) {
+                const item = credentials[i];
+                if (item.user === userInput && item.password === passwordInput) {
+                    matchedUser = item;
+                    break;
+                }
+            }
+
+            if (matchedUser) {
+                // Si los datos son correctos, guardamos el usuario y vamos a la página de tickets.
+                localStorage.setItem('techsolveUser', matchedUser.user);
                 window.location.href = 'mis-tickets.html';
             } else {
+                // Si no encontró coincidencia, mostramos un mensaje de error.
                 message.textContent = 'Usuario o contraseña incorrectos. Intenta de nuevo.';
             }
         });
