@@ -35,6 +35,15 @@ de soporte técnico con su usuario y contraseña correspondiente.
 
 -Panel Técnico: Aca se da la bienvenida al panel técnico.Esta va a ser la sección donde se van a gestionar y visualizar el estado de los tickets.
 
+funcionalidades previstas para la siguiente entrega:
+
+Pagina Registrar ticket
+
+[Agregar Formulario]
+-Categorías 
+-Descripción del problema
+
+
 
 
   
