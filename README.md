@@ -2,7 +2,7 @@ Caso de estudio: Sistema integrado de Soporte Técnico y Gestion de incidentes
 
 Equipo Desarrollador: TechSolve
 
-Integrantes: Arn Constanza, Ahumada Walter, De caxias Alejo, Vijande Lautaro, Damiano Azul
+Integrantes: Arn Constanza, Ahumada Walter, De caxias Alejandro, Vijande Lautaro, Damiano Azul
 
 Descripción del sistema:
 
