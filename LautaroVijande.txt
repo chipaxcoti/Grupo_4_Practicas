@@ -1,0 +1,6 @@
+Nombre Alumno: Lautaro Gaston
+Apellido Alumno: Vijande
+DNI Alumno: 42471277
+Email Alumno: lautarogvijande@gmail.com
+
+
