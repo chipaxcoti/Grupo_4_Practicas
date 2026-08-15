@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Tickets - TechSolve</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <div class="logo">
+                <img src="../img/logo.jpg" alt="TechSolve logo featuring company branding for technical support services">
+                <h1>TechSolve</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="login.html">Iniciar sesión</a></li>
+                    <li><a href="registrar-ticket.html">Registrar Ticket</a></li>
+                    <li><a href="mis-tickets.html" class="active">Mis Tickets</a></li>
+                    <li><a href="panel-tecnico.html">Panel Técnico</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Perfil de usuario -->
+        <div class="user-profile" id="userProfile">
+            <div class="user-avatar">
+                <svg viewBox="0 0 24 24" fill="#000" stroke="none">
+                    <!-- Cabeza -->
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <!-- Cuerpo y hombros -->
+                    <path d="M12 11 C14 11 18 13 18 17 L6 17 C6 13 10 11 12 11" fill="#000"></path>
+                </svg>
+            </div>
+            <span class="user-name" id="userName">Usuario</span>
+        </div>
+        
+        <!-- Menú desplegable -->
+        <div class="user-menu" id="userMenu">
+            <button id="logoutButton">Cerrar sesión</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>Mis Tickets</h2>
+            <p>Bienvenido a tu panel de tickets. Aquí podrás acceder a tus solicitudes registradas.</p>
+        </section>
+
+        <section class="content-card">
+            <p id="welcomeText"></p>
+            <div id="ticketsContainer" style="margin-top: 20px;">
+                <!-- Los tickets se cargarán aquí con JavaScript -->
+            </div>
+        </section>
+    </main>
+
+
+
+    <script>
+        const user = sessionStorage.getItem('techsolveUser');
+
+        if (!user) {
+            window.location.href = 'login.html';
+        } else {
+            // Mostrar nombre en el perfil de usuario
+            document.getElementById('userName').textContent = user.charAt(0).toUpperCase() + user.slice(1);
+            document.getElementById('welcomeText').textContent = `Hola ${user}, aquí verás tus tickets activos.`;
+
+            // Cargar y mostrar tickets
+            loadTickets();
+        }
+
+        function loadTickets() {
+            const tickets = JSON.parse(sessionStorage.getItem('techsolveTickets') || '[]');
+            const ticketsContainer = document.getElementById('ticketsContainer');
+
+            if (tickets.length === 0) {
+                ticketsContainer.innerHTML = '<p style="color: #999;">No hay tickets creados aún. <a href="registrar-ticket.html">Crear uno ahora</a></p>';
+                return;
+            }
+
+            // Crear tabla de tickets
+            let html = `
+                <table class="tickets-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            tickets.forEach(ticket => {
+                html += `
+                    <tr>
+                        <td><strong>${ticket.id}</strong></td>
+                        <td>${ticket.titulo}</td>
+                        <td>${ticket.descripcion.substring(0, 50)}${ticket.descripcion.length > 50 ? '...' : ''}</td>
+                        <td><span class="status-badge">${ticket.estado}</span></td>
+                        <td>${ticket.fecha}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            ticketsContainer.innerHTML = html;
+        }
+
+        // Manejar click en el perfil para abrir/cerrar menú
+        document.getElementById('userProfile').addEventListener('click', () => {
+            const menu = document.getElementById('userMenu');
+            menu.classList.toggle('show');
+        });
+
+        // Manejar logout
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            sessionStorage.removeItem('techsolveUser');
+            window.location.href = 'login.html';
+        });
+
+        // Cerrar menú si clickea afuera
+        document.addEventListener('click', (e) => {
+            const profile = document.getElementById('userProfile');
+            const menu = document.getElementById('userMenu');
+            if (!profile.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+
+</html>

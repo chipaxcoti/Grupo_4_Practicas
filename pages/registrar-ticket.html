@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Ticket - TechSolve</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <div class="logo">
+                <img src="../img/logo.jpg" alt="Logo TechSolve">
+                <h1>TechSolve</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="login.html">Iniciar sesión</a></li>
+                    <li><a href="registrar-ticket.html" class="active">Registrar Ticket</a></li>
+                    <li><a href="mis-tickets.html">Mis Tickets</a></li>
+                    <li><a href="panel-tecnico.html">Panel Técnico</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Perfil de usuario -->
+        <div class="user-profile" id="userProfile">
+            <div class="user-avatar">
+                <svg viewBox="0 0 24 24" fill="#000" stroke="none">
+                    <!-- Cabeza -->
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <!-- Cuerpo y hombros -->
+                    <path d="M12 11 C14 11 18 13 18 17 L6 17 C6 13 10 11 12 11" fill="#000"></path>
+                </svg>
+            </div>
+            <span class="user-name" id="userName">Usuario</span>
+        </div>
+        
+        <!-- Menú desplegable -->
+        <div class="user-menu" id="userMenu">
+            <button id="logoutButton">Cerrar sesión</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>Registrar Ticket</h2>
+            <p>Usa este formulario para crear un nuevo ticket de soporte técnico.</p>
+        </section>
+
+        <section class="content-card">
+            <form id="ticketForm">
+                <div class="input-group">
+                    <label for="titulo">Título del Ticket</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Resumen breve del problema" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Describe detalladamente tu problema o solicitud..." rows="6" required></textarea>
+                </div>
+
+                <button type="submit" class="boton">Crear Ticket</button>
+                <p id="successMessage" class="success-message" style="display: none;"></p>
+                <p id="errorMessage" class="error-message" style="display: none;"></p>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const user = sessionStorage.getItem('techsolveUser');
+
+        if (!user) {
+            window.location.href = 'login.html';
+        } else {
+            // Mostrar nombre en el perfil de usuario
+            document.getElementById('userName').textContent = user.charAt(0).toUpperCase() + user.slice(1);
+        }
+
+        // Manejar click en el perfil para abrir/cerrar menú
+        document.getElementById('userProfile').addEventListener('click', () => {
+            const menu = document.getElementById('userMenu');
+            menu.classList.toggle('show');
+        });
+
+        // Manejar logout
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            sessionStorage.removeItem('techsolveUser');
+            window.location.href = 'login.html';
+        });
+
+        // Cerrar menú si clickea afuera
+        document.addEventListener('click', (e) => {
+            const profile = document.getElementById('userProfile');
+            const menu = document.getElementById('userMenu');
+            if (!profile.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Manejo del formulario de tickets
+        const ticketForm = document.getElementById('ticketForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        ticketForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const titulo = document.getElementById('titulo').value.trim();
+            const descripcion = document.getElementById('descripcion').value.trim();
+
+            if (!titulo || !descripcion) {
+                errorMessage.textContent = 'Por favor completa todos los campos.';
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                return;
+            }
+
+            // Obtener tickets existentes
+            let tickets = JSON.parse(sessionStorage.getItem('techsolveTickets') || '[]');
+
+            // Generar número del ticket incremental
+            let nextNumber = 1;
+            if (tickets.length > 0) {
+                const lastTicketId = tickets[tickets.length - 1].id;
+                const lastNumber = parseInt(lastTicketId.replace('TK-', ''));
+                nextNumber = lastNumber + 1;
+            }
+
+            const ticketId = `TK-${String(nextNumber).padStart(3, '0')}`;
+
+            // Crear nuevo ticket
+            const newTicket = {
+                id: ticketId,
+                titulo: titulo,
+                descripcion: descripcion,
+                usuario: user,
+                fecha: new Date().toLocaleString('es-ES'),
+                estado: 'Abierto'
+            };
+
+            // Guardar ticket
+            tickets.push(newTicket);
+            sessionStorage.setItem('techsolveTickets', JSON.stringify(tickets));
+
+            // Mostrar mensaje de éxito
+            successMessage.textContent = `✓ Ticket ${ticketId} creado exitosamente. Puedes verlo en "Mis Tickets".`;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+
+            // Limpiar formulario
+            ticketForm.reset();
+
+            // Limpiar mensaje después de 5 segundos
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+    </script>
+
+</body>
+
+</html>
