@@ -26,13 +26,31 @@
     </header>
 
     <main>
+        
         <section class="page-header">
             <h2>Registrar Ticket</h2>
             <p>Usa este formulario para crear un nuevo ticket de soporte técnico.</p>
         </section>
-
+        
         <section class="content-card">
-            <p>En esta versión de demostración no se guardan tickets reales. Inicia sesión y sigue la navegación.</p>
+            <form action="procesar-ticket.php" method="POST" class="form-card">
+                <div class="input-group">
+                    <label for="categoria">Categoría:</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="">Seleccione una categoría</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="software">Software</option>
+                        <option value="red">Red</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="descripcion">Descripción del problema:</label>
+                    <textarea id="descripcion" name="descripcion" rows="5" placeholder="Describe el problema..."></textarea>
+                </div>
+
+                <button type="submit" class="boton">Registrar Ticket</button>
         </section>
     </main>
 

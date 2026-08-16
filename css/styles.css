@@ -1,15 +1,20 @@
-﻿body {
+﻿/*RESETEA MARGENES, DEFINE LA TIPOGRAFIA BASE 
+Y ESTABLE EL COLOR DE FONDO DEL CUERPO Y TEXTO */
+body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f0f0f0;
     color: #333;
-}
+} 
+
+/* Se define el color de encabezado azul oscuro y el color de texto blanco */ 
 
 header {
     background: #1a202c;
     color: #fff;
     padding: 20px;
 }
+/* Se define el estilo del logo, incluyendo la alineación y el tamaño de la imagen */
 
 .logo {
     display: inline-flex;
@@ -22,9 +27,12 @@ header {
     height: auto;
 }
 
+/* Se define el estilo del título del logo, incluyendo el tamaño de fuente y el peso de la fuente */
+
 nav {
     margin-top: 15px;
 }
+/* Se define el estilo de la lista de navegación, incluyendo la eliminación de los estilos de lista predeterminados y la disposición en línea de los elementos de la lista */
 
 nav ul {
     list-style: none;
@@ -33,7 +41,7 @@ nav ul {
     display: flex;
     gap: 10px;
 }
-
+/* Se define el estilo de los enlaces de navegación, incluyendo el color, la decoración del texto, el relleno, el radio del borde y el color de fondo */
 nav a {
     color: #fff;
     text-decoration: none;
@@ -41,27 +49,31 @@ nav a {
     border-radius: 5px;
     background: #2d3748;
 }
-
+/* Se define el estilo de los enlaces de navegación cuando se pasa el cursor sobre ellos o cuando están activos, incluyendo el color de fondo */
 nav a:hover,
 nav a.active {
     background: #4a5568;
 }
-
+/* Se define el estilo del contenido principal, incluyendo el relleno, el ancho máximo y la alineación centrada */
 main {
     padding: 20px;
     max-width: 800px;
     margin: 0 auto;
 }
+/* Se define el estilo del encabezado de la página, incluyendo el margen inferior y el tamaño de fuente */
 
 .page-header h2 {
     margin: 0 0 10px 0;
     font-size: 26px;
 }
+/* Se define el estilo del párrafo dentro del encabezado de la página, incluyendo el margen inferior y el color del texto */
 
 .page-header p {
     margin: 0 0 20px 0;
     color: #555;
 }
+
+/* Se define el estilo de las tarjetas de formulario y contenido, incluyendo el color de fondo, el borde, el radio del borde, el relleno y el margen inferior */
 
 .form-card,
 .content-card {
@@ -72,6 +84,8 @@ main {
     margin-bottom: 20px;
 }
 
+/* Se define el estilo del grupo de entrada, incluyendo el margen inferior */
+
 .input-group {
     margin-bottom: 15px;
 }
@@ -81,6 +95,7 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
 }
+/* Se define el estilo de los campos de entrada, incluyendo el ancho, el relleno, el borde y el radio del borde */
 
 input {
     width: 100%;
