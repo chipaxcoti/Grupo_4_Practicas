@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Tickets - TechSolve</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/scripts.js" defer></script>
 </head>
 
 <body>
@@ -28,9 +29,44 @@
     <main>
         <section class="page-header">
             <h2>Mis Tickets</h2>
-            <p>Bienvenido a tu panel de tickets. Aquí podrás acceder a tus solicitudes registradas.</p>
-        </section>
 
+            <table class="tabla-tickets">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Categoría</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Prioridad</th>
+                    </tr>
+                </thead>
+
+                <tbody id="ticketsTableBody">
+                    <!-- JavaScript agregará aquí las filas de los tickets -->
+                </tbody>
+            </table>
+            <button type="button" class="boton" id="historialTicketsButton">Ver Historial</button>
+            <div id="historialPanel" class="content-card" hidden>
+    <h3>Editar mis tickets</h3>
+
+    <label for="selectorTicket">Elegí un ticket:</label>
+    <select id="selectorTicket"></select>
+
+    <form id="editarTicketForm">
+        <label for="editarCategoria">Categoría:</label>
+        <input id="editarCategoria" required>
+
+        <label for="editarDescripcion">Descripción:</label>
+        <textarea id="editarDescripcion" rows="3" required></textarea>
+
+        <button type="submit" class="boton">
+            Guardar cambios
+        </button>
+    </form>
+
+    <p id="mensajeEdicion" role="status"></p>
+</div>
+        </section>
         <section class="content-card">
             <p id="welcomeText"></p>
             <button class="boton secondary" id="logoutButton">Cerrar sesión</button>
@@ -50,6 +86,7 @@
 
         document.getElementById('logoutButton').addEventListener('click', () => {
             localStorage.removeItem('techsolveUser');
+            localStorage.removeItem("techsolveRol");
             window.location.href = 'login.html';
         });
     </script>

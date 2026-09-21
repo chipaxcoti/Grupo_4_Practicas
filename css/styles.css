@@ -156,3 +156,22 @@ footer {
         padding: 15px;
     }
 }
+/* Se define el estilo de la tabla de tickets, incluyendo el ancho, la colapsación de bordes, el color de fondo y el margen inferior */
+.tabla-tickets {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.tabla-tickets th,
+.tabla-tickets td {
+    border: 1px solid #777;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabla-tickets th {
+    background-color: #1a202c;
+    color: white;
+}
