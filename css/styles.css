@@ -282,3 +282,51 @@ footer {
         padding: 15px;
     }
 }
+<<<<<<< Updated upstream
+=======
+/* Se define el estilo de la tabla de tickets, incluyendo el ancho, la colapsación de bordes, el color de fondo y el margen inferior */
+.tabla-tickets {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.tabla-tickets th,
+.tabla-tickets td {
+    border: 1px solid #777;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabla-tickets th {
+    background-color: #1a202c;
+    color: white;
+}
+
+nav ul li a,
+nav ul li button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 102px;
+    height: 34px;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    line-height: 1;
+}
+
+nav ul li button {
+    border: 1px solid #2563eb;
+    border-radius: 5px;
+    background-color: #808080;
+    color: #fff;
+    cursor: pointer;
+}
+
+nav ul li button:hover {
+    background-color: #6b6b6b;
+}
+>>>>>>> Stashed changes

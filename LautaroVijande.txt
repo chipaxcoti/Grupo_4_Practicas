@@ -1,0 +1,209 @@
+Nombre Alumno: Lautaro Gaston
+Apellido Alumno: Vijande
+DNI Alumno: 42471277
+Email Alumno: lautarogvijande@gmail.com
+
+
+26/09/2026
+
+TECHSOLVE - CAMBIOS REALIZADOS
+
+1. MANEJO DE ROLES
+
+Se definieron dos roles:
+- usuario
+- tecnico
+
+Permisos:
+- Usuario: registrar tickets y ver sus propios tickets.
+- Técnico: acceder al panel técnico, registrar tickets y consultar todos los tickets.
+- Usuario: no puede acceder al panel técnico.
+- Visitante: solo puede acceder al inicio y al login.
+
+2. DATOS
+
+Se creó y organizó data/datos.json.
+
+Contiene:
+- Cuatro usuarios: dos usuarios comunes y dos técnicos.
+- Tickets iniciales.
+- Relaciones mediante usuarioId y tecnicoId.
+
+Los tickets se relacionan con usuarios mediante sus identificadores.
+
+3. INICIO DE SESIÓN
+
+Se implementó un login simulado usando:
+- fetch() para leer data/datos.json.
+- Comparación de usuario y contraseña.
+- localStorage para guardar la sesión.
+- Redirección según el rol.
+
+Credenciales de prueba:
+- john_doe / 1234
+- ana_garcia / 1234
+- tecnico_01 / 1234
+- tecnico_02 / 1234
+
+La sesión se guarda con la clave:
+sesionTechSolve
+
+4. PERSISTENCIA
+
+Se utiliza localStorage para conservar:
+- La sesión iniciada.
+- Los tickets creados o modificados.
+
+Los tickets se guardan con la clave:
+techsolveTickets
+
+Los datos de datos.json funcionan como información inicial. Luego, las modificaciones quedan guardadas en localStorage.
+
+5. SCRIPTS.JS
+
+Se reorganizó scripts.js desde cero para centralizar:
+- Carga de datos.
+- Manejo de sesión.
+- Control de acceso.
+- Generación del menú.
+- Inicio de sesión.
+- Registro de tickets.
+- Visualización de tickets.
+- Generación automática de IDs.
+
+Se utiliza resolverURL() para que las rutas funcionen tanto desde la raíz como desde la carpeta pages.
+
+6. MENÚ DINÁMICO
+
+El menú se genera mediante JavaScript según el estado de la sesión.
+
+Como visitante se muestran:
+- Inicio.
+- Iniciar sesión.
+
+Como usuario se muestran:
+- Registrar Ticket.
+- Mis Tickets.
+- Cerrar sesión.
+
+Como técnico se muestran:
+- Registrar Ticket.
+- Mis Tickets.
+- Panel Técnico.
+- Cerrar sesión.
+
+El botón Inicio puede ocultarse cuando existe una sesión iniciada.
+
+7. CONTROL DE ACCESO
+
+Se agregó protección para las páginas:
+- registrar-ticket.html
+- mis-tickets.html
+- panel-tecnico.html
+
+Si una persona no inició sesión, es enviada al login.
+
+Si un usuario intenta acceder manualmente al panel técnico, es redirigido a Mis Tickets.
+
+8. REGISTRO DE TICKETS
+
+Se reemplazó el envío tradicional del formulario por PHP.
+
+Se eliminó:
+- action="procesar-ticket.php"
+- method="POST"
+
+El formulario ahora es procesado por JavaScript y guarda los datos en localStorage.
+
+Cada ticket registra:
+- ID.
+- Usuario creador.
+- Técnico asignado.
+- Categoría.
+- Descripción.
+- Estado.
+- Prioridad.
+
+9. IDENTIFICADORES DE TICKETS
+
+Se reemplazó la generación basada en Date.now(), que producía números largos como TS1790450413016.
+
+Ahora se generan IDs consecutivos:
+- TS001
+- TS002
+- TS003
+
+10. MIS TICKETS
+
+La vista filtra los tickets según el rol:
+- El usuario ve solamente sus tickets.
+- El técnico puede consultar todos los tickets.
+
+La información se genera dinámicamente mediante JavaScript.
+
+11. PANEL TÉCNICO
+
+Se agregó una tabla para que el técnico consulte:
+- ID.
+- Categoría.
+- Descripción.
+- Estado.
+- Prioridad.
+
+Actualmente el panel permite consultar tickets. La modificación de estados, prioridades o asignaciones todavía no está implementada.
+
+12. CERRAR SESIÓN
+
+El botón de cerrar sesión:
+- Elimina sesionTechSolve del localStorage.
+- Redirige al inicio.
+- Se genera dinámicamente desde JavaScript.
+
+Se ajustó su diseño para integrarlo visualmente con el menú.
+
+13. ESTILOS
+
+Se mantuvieron los estilos generales de la aplicación.
+
+Se trabajó específicamente sobre el botón de cerrar sesión para:
+- Mantener un tamaño uniforme.
+- Usar fondo gris.
+- Usar letras blancas.
+- Usar borde azul.
+- Mantener la misma posición que los demás botones.
+
+14. CÓDIGO ELIMINADO
+
+Se eliminaron o reemplazaron:
+- Formularios que enviaban datos a archivos PHP.
+- Scripts inline duplicados.
+- Validaciones antiguas de sesión.
+- Las claves antiguas techsolveUser y techsolveRol.
+- Listeners duplicados.
+- Bloques de código incompletos.
+- Datos JSON duplicados o inválidos.
+- Generación de IDs con Date.now().
+
+Se eliminaron porque provocaban conflictos, redirecciones incorrectas, errores de sintaxis o no cumplían con los requisitos del Hito 3.
+
+15. FORMA DE EJECUCIÓN
+
+La aplicación debe ejecutarse con Live Server.
+
+No debe abrirse mediante file:// porque fetch() no puede cargar datos.json desde ese protocolo.
+
+La URL debe comenzar con:
+http://127.0.0.1:5500/
+
+16. TECNOLOGÍAS UTILIZADAS
+
+- HTML.
+- CSS.
+- JavaScript.
+- fetch().
+- localStorage.
+- JSON.
+- Manipulación del DOM.
+- Métodos de arrays.
+- No se utilizaron frameworks, librerías externas, bases de datos ni autenticación real.
+

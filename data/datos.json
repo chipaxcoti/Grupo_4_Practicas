@@ -1,0 +1,52 @@
+{
+    "usuarios": [
+        {
+            "id": 1,
+            "usuario": "john_doe",
+            "password": "1234",
+            "nombre": "John Doe",
+            "rol": "usuario"
+        },
+        {
+            "id": 2,
+            "usuario": "ana_garcia",
+            "password": "1234",
+            "nombre": "Ana García",
+            "rol": "usuario"
+        },
+        {
+            "id": 3,
+            "usuario": "tecnico_01",
+            "password": "1234",
+            "nombre": "Carlos Técnico",
+            "rol": "tecnico"
+        },
+        {
+            "id": 4,
+            "usuario": "tecnico_02",
+            "password": "1234",
+            "nombre": "Laura Técnica",
+            "rol": "tecnico"
+        }
+    ],
+    "tickets": [
+        {
+            "id": "TS001",
+            "usuarioId": 1,
+            "tecnicoId": 3,
+            "categoria": "Hardware",
+            "descripcion": "La computadora no enciende",
+            "estado": "Abierto",
+            "prioridad": "Alta"
+        },
+        {
+            "id": "TS002",
+            "usuarioId": 2,
+            "tecnicoId": 4,
+            "categoria": "Software",
+            "descripcion": "No puedo abrir el correo",
+            "estado": "En proceso",
+            "prioridad": "Media"
+        }
+    ]
+}
